@@ -1,0 +1,26 @@
+plugins {
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.14'
+    id 'org.beryx.jlink' version '2.26.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+javafx {
+    version = "20"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+application {
+    mainClass = "edu.metrostate.MainApp"
+    mainModule = "App"
+}
+
+jlink {
+    addOptions('--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages')
+    launcher {
+        name = 'App'
+    }
+}

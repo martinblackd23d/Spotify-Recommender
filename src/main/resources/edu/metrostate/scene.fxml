@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.HBox?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="edu.metrostate.MainSceneController"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <center>
+        <AnchorPane>
+            <VBox alignment="CENTER"
+                  AnchorPane.rightAnchor="0.0"
+                  AnchorPane.leftAnchor="0.0"
+                  AnchorPane.topAnchor="0.0"
+                  AnchorPane.bottomAnchor="0.0">
+                <Label fx:id="label" text="Application Content"/>
+                <Label fx:id="value"/>
+            </VBox>
+        </AnchorPane>
+    </center>
+    <bottom>
+        <HBox fx:id="bottomBar" alignment="CENTER">
+            <Label fx:id="bottom" text="You can add a status bar or footer here." />
+        </HBox>
+    </bottom>
+</BorderPane>
