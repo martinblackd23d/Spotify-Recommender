@@ -29,6 +29,11 @@ public class Auth {
 
 	private BlockingQueue<String> queue = new LinkedBlockingQueue<String>();
 
+	/**
+	 * Logs the user into Spotify and retrieves an access token, as well as the user's ID.
+	 * use getAccessToken() and getUserId() to retrieve the access token and user ID respectively.
+	 * @return success
+	 */
 	public boolean login() {
 		String url = "https://accounts.spotify.com/authorize" + 
 			"?client_id=" + CLIENT_ID + 
