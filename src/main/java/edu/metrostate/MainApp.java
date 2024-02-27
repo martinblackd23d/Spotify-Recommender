@@ -8,6 +8,15 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 
+import com.sun.net.httpserver.HttpServer;
+import com.sun.net.httpserver.HttpHandler;
+import com.sun.net.httpserver.HttpExchange;
+
+import java.util.Map;
+import java.util.HashMap;
+
+import com.google.gson.JsonObject;
+
 public class MainApp extends Application {
 
     private final ValueStore store;
@@ -35,6 +44,30 @@ public class MainApp extends Application {
         stage.setTitle("ICS 372 - HelloFX");
         stage.setScene(scene);
         stage.show();
+
+        Auth auth = new Auth();
+        auth.login();
+
+        System.out.println("Created playlist with id: " + createPlaylist("test playlist", auth));
+    }
+
+    private  String createPlaylist(String name, Auth auth) {
+        String url = "https://api.spotify.com/v1/users/" + auth.getUserId() + "/playlists";
+        
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Authorization", "Bearer " + auth.getAccessToken());
+        headers.put("Content-Type", "application/json");
+        
+        String data = "{\"name\":\"" + name + "\",\"public\":false}";
+        
+        try {
+            JsonObject response = Request.request("POST", url, null, headers, data);
+            return response.get("id").getAsString();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
     }
 
     private void loadStylesheetIntoScene(Scene scene) {
