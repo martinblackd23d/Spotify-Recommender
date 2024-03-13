@@ -22,9 +22,12 @@ public class Recommendation {
         seedGenre.add(genre);
     }
     public List<Song> getRecommendation(){
+        List<Song> newPlaylist = new ArrayList<Song>();
         //makes API call
         //this can be dummy data for now
 
         //when this is finished it should be calling request from the Request class
+        //returns playlist when done.
+        return newPlaylist;
     }
 }
