@@ -45,12 +45,20 @@ public class MainApp extends Application {
         stage.setScene(scene);
         stage.show();
 
+        //Log in to Spotify
         Auth auth = new Auth();
         auth.login();
 
+        //Create a playlist to test the API
         System.out.println("Created playlist with id: " + createPlaylist("test playlist", auth));
     }
 
+    /**
+     * Creates a playlist with the given name.
+     * @param name
+     * @param auth
+     * @return
+     */
     private  String createPlaylist(String name, Auth auth) {
         String url = "https://api.spotify.com/v1/users/" + auth.getUserId() + "/playlists";
         
