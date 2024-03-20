@@ -41,25 +41,9 @@ public class MainApp extends Application {
 
         loadStylesheetIntoScene(scene);
 
-        stage.setTitle("ICS 372 - HelloFX");
+        stage.setTitle("ICS 372 - Spotify Recommendations");
         stage.setScene(scene);
         stage.show();
-
-        //Log in to Spotify
-        Auth auth = new Auth();
-        auth.login();
-
-        //Create a playlist from a recommendation to test the API
-        Recommendation recommendation = new Recommendation();
-        recommendation.addSong(new Song("2QTDuJIGKUjR7E2Q6KupIh", auth));
-        Playlist playlist = recommendation.getRecommendation(auth);
-
-        //Update the list view with the new playlist
-        mainSceneController.updateRecListView(playlist);
-
-        //Export the playlist to the user's Spotify account
-        playlist.exportPlaylist("test playlist", auth);
-        System.out.println("Playlist created");
     }
 
     private void loadStylesheetIntoScene(Scene scene) {

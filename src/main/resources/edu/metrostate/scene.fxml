@@ -29,7 +29,7 @@
     </bottom>
    <left>
          <VBox alignment="CENTER" BorderPane.alignment="TOP_LEFT">
-         <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="79.0" text="Login">
+         <Button fx:id="loginButton" onAction="#handleLogin" mnemonicParsing="false" prefHeight="27.0" prefWidth="79.0" text="Login">
             <VBox.margin>
                <Insets bottom="30.0" left="10.0" top="-175.0" />
             </VBox.margin>
