@@ -25,7 +25,10 @@ Auth.java
 MainApp.java
 - main class
 - sets up UI
-- automatically runs some demo functionality
+
+MainSceneController.java
+- automatically runs some demo functionality when the login button is pressed
+- populates listview
 
 Request.java
 - Static class for handling HTTP requests
