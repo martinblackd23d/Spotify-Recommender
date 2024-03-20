@@ -31,6 +31,8 @@ public class Request {
 	public static JsonObject request(String method, String url, Map<String, String> params, Map<String, String> headers, String data) throws Exception {
 		HttpClient client = HttpClient.newHttpClient();
 		HttpRequest request = null;
+
+		//set up parameters
 		String paramString = "";
 		if (params == null) {
 			params = new HashMap<String, String>();
@@ -39,6 +41,7 @@ public class Request {
 			paramString = key + "=" + params.get(key) + "&";
 		}
 		
+		//set up headers
 		if (headers == null) {
 			headers = new HashMap<String, String>();
 		}
@@ -53,6 +56,7 @@ public class Request {
 			data = "";
 		}
 
+		//create request
 		if (method.equals("GET")) {
 			request = HttpRequest.newBuilder()
 					.uri(new URI(url + "?" + paramString))
@@ -67,6 +71,7 @@ public class Request {
 					.build();
 		}
 
+		//send request and get response
 		HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
 		if (response.statusCode() / 100 != 2) {

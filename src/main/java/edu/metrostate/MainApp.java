@@ -45,29 +45,16 @@ public class MainApp extends Application {
         stage.setScene(scene);
         stage.show();
 
+        //Log in to Spotify
         Auth auth = new Auth();
         auth.login();
 
-        System.out.println("Created playlist with id: " + createPlaylist("test playlist", auth));
-    }
-
-    private  String createPlaylist(String name, Auth auth) {
-        String url = "https://api.spotify.com/v1/users/" + auth.getUserId() + "/playlists";
-        
-        Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Authorization", "Bearer " + auth.getAccessToken());
-        headers.put("Content-Type", "application/json");
-        
-        String data = "{\"name\":\"" + name + "\",\"public\":false}";
-        
-        try {
-            JsonObject response = Request.request("POST", url, null, headers, data);
-            return response.get("id").getAsString();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-
+        //Create a playlist to test the API
+        ArrayPlaylist playlist = new ArrayPlaylist();
+        playlist.addSong(new Song("2QTDuJIGKUjR7E2Q6KupIh", auth));
+        playlist.addSong(new Song("0S7XIu0dn63ayGxjefd5It", auth));
+        playlist.exportPlaylist("test playlist", auth);
+        System.out.println("Playlist created");
     }
 
     private void loadStylesheetIntoScene(Scene scene) {

@@ -35,6 +35,7 @@ public class Auth {
 	 * @return success
 	 */
 	public boolean login() {
+		//opens oauth page in browser and calls interceptRedirect()
 		String url = "https://accounts.spotify.com/authorize" + 
 			"?client_id=" + CLIENT_ID + 
 			"&response_type=code" + 
@@ -56,6 +57,7 @@ public class Auth {
 			return false;
 		}
 		
+		//exchange code for access token
 		String data = "grant_type=authorization_code&code=" + code + "&redirect_uri=" + REDIRECT_URI;
 		Map<String, String> headers = new HashMap<String, String>();
 		headers.put("Authorization", "Basic " + 
@@ -70,6 +72,7 @@ public class Auth {
 			return false;
 		}
 
+		//get user id
 		try {
 			response = Request.request("GET", "https://api.spotify.com/v1/me", null, 
 				new HashMap<String, String>(){{put("Authorization", "Bearer " + accessToken);}}, null);
@@ -82,23 +85,39 @@ public class Auth {
 		return true;
 	}
 
+
+	/**
+	 * Returns the access token that can be used to make requests to the Spotify API.
+	 * @return
+	 */
 	public String getAccessToken() {
 		return accessToken;
 	}
 
+
+	/**
+	 * Returns the user ID of the user that is logged in.
+	 * @return
+	 */
 	public String getUserId() {
 		return userId;
 	}
 
-	private void interceptRedirect() throws IOException {
 
+	/**
+	 * Intercepts the redirect from the Spotify login page and retrieves the access token.
+	 * @throws IOException
+	 */
+	private void interceptRedirect() throws IOException {
+		//start http server to intercept redirect
 		HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
 		server.createContext("/callback", new HttpHandler() {
 			@Override
 			public void handle(HttpExchange exchange) throws IOException {
-				String response = "Auth successful";
+				String response = "Auth successful.\nYou may now close this window.";
 				exchange.sendResponseHeaders(200, response.length());
 				
+				//extract code from redirect
 				OutputStream os = exchange.getResponseBody();
 				os.write(response.getBytes());
 				os.close();
