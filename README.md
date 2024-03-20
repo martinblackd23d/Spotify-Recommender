@@ -1,12 +1,10 @@
 # Running the project
 
-```./gradlew build```
-
 ```./gradlew run```
 
 Currently the program will automatically initiate the login procedure by opening up the sign in page in the browser.
 
-Once successfully signed in, it will create a test playlist with 2 songs in the logged in users library for demonstration purposes.
+Once successfully signed in, it will create a recommendation from one song and save it as a playlist for the logged in user.
 
 # Code structure
 
@@ -29,14 +27,16 @@ Song.java
 - Abstract class for AudioContent structures
 - Concrete subclass Song
 
-
+Recommendation.java
+- Class for handling recommendations
 
 
 
 4 concrete classes (all demonstrated in MainApp.java):
--ArrayPlaylist - ArrayPlaylist.java
--Auth - Auth.java
--Song - Song.java
+- ArrayPlaylist - ArrayPlaylist.java
+- Auth - Auth.java
+- Song - Song.java
+- Recommendation - Recommendation.java
 
 Interface, implemented by ArrayPlaylist:
 - Playlist - ArrayPlaylist.java

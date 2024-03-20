@@ -33,9 +33,9 @@ public class MainApp extends Application {
         MainSceneController mainSceneController = loader.getController();
         mainSceneController.setValueStore(store);
 
-        MainToolBar mainToolBar = new MainToolBar();
-        MainToolBarController mainToolBarController = new MainToolBarController(mainToolBar, store);
-        root.setTop(mainToolBar);
+        //MainToolBar mainToolBar = new MainToolBar();
+        //MainToolBarController mainToolBarController = new MainToolBarController(mainToolBar, store);
+        //root.setTop(mainToolBar);
 
         Scene scene = new Scene(root);
 
@@ -49,10 +49,10 @@ public class MainApp extends Application {
         Auth auth = new Auth();
         auth.login();
 
-        //Create a playlist to test the API
-        ArrayPlaylist playlist = new ArrayPlaylist();
-        playlist.addSong(new Song("2QTDuJIGKUjR7E2Q6KupIh", auth));
-        playlist.addSong(new Song("0S7XIu0dn63ayGxjefd5It", auth));
+        //Create a playlist from a recommendation to test the API
+        Recommendation recommendation = new Recommendation();
+        recommendation.addSong(new Song("2QTDuJIGKUjR7E2Q6KupIh", auth));
+        Playlist playlist = recommendation.getRecommendation(auth);
         playlist.exportPlaylist("test playlist", auth);
         System.out.println("Playlist created");
     }

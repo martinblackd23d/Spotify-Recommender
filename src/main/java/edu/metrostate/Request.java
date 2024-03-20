@@ -38,7 +38,7 @@ public class Request {
 			params = new HashMap<String, String>();
 		}
 		for (String key : params.keySet()) {
-			paramString = key + "=" + params.get(key) + "&";
+			paramString += key + "=" + params.get(key) + "&";
 		}
 		
 		//set up headers
@@ -75,7 +75,8 @@ public class Request {
 		HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
 		if (response.statusCode() / 100 != 2) {
-			throw new Exception("Request failed with status code " + response.statusCode() + ": " + response.body());
+			throw new Exception("Request failed with status code " + response.statusCode() + ": " + response.body() + 
+					"\nURL: " + url + "\nMethod: " + method + "\nParams: " + paramString + "\n\t" + params.toString() + "\nHeaders: " + headers.toString() + "\nData: " + data);
 		}
 
 		JsonObject result = new JsonParser().parse(response.body()).getAsJsonObject();

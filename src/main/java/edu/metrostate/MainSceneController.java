@@ -19,7 +19,7 @@ public class MainSceneController implements ValueChangedListener {
     private final String valueFormatString = "Current value: %d";
 
     public void initialize() {
-        label.setText("Hello, ICS372 JavaFX");
+        //label.setText("Hello, ICS372 JavaFX");
     }
 
     public void setValueStore(ValueStore store) {
@@ -31,6 +31,6 @@ public class MainSceneController implements ValueChangedListener {
 
     @Override
     public void onValueChange(int newValue) {
-        value.setText(String.format(valueFormatString, newValue));
+        //value.setText(String.format(valueFormatString, newValue));
     }
 }

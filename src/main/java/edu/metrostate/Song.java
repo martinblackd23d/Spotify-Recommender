@@ -31,6 +31,7 @@ public class Song extends AudioContent{
 
 	private ArrayList<String> attributes;
 	private String artist;
+	private String artistId;
 
 	public Song(String id, Auth auth) {
 		HashMap<String, String> headers = new HashMap<String, String>();
@@ -46,6 +47,7 @@ public class Song extends AudioContent{
 		this.title = response.get("name").getAsString();
 		this.length = response.get("duration_ms").getAsInt() / 1000;
 		this.artist = response.get("artists").getAsJsonArray().get(0).getAsJsonObject().get("name").getAsString();
+		this.artistId = response.get("artists").getAsJsonArray().get(0).getAsJsonObject().get("id").getAsString();
 		this.attributes = new ArrayList<String>();
 	}
 
@@ -60,5 +62,9 @@ public class Song extends AudioContent{
 
 	public String getArtist() {
 		return artist;
+	}
+
+	public String getArtistId() {
+		return artistId;
 	}
 }
