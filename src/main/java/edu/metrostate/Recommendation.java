@@ -8,6 +8,10 @@ public class Recommendation {
 
     public Recommendation(){
         //constructor
+        this.seedSongs = new ArrayList<String>();
+        this.seedArtists = new ArrayList<String>();
+        this.seedGenre = new ArrayList<String>();
+        this.attributes = new ArrayList<Attribute>();
     }
     public void addSong(String song){
         seedSongs.add(song);
