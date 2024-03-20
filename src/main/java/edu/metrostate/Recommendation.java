@@ -1,5 +1,8 @@
 package edu.metrostate;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Recommendation {
     private List<String> seedSongs;
     private List<String> seedArtists;
