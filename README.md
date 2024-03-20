@@ -1,3 +1,11 @@
+# Spotify Song Recommender
+
+Martin Black, Torri Presler, Tracey Treat
+
+ICS 372
+
+The Spotify Song Recommender is a Java program that, when given a seed (for example, another song), uses the [Spotify API](https://developer.spotify.com/documentation/web-api) to generate personalized song recommendations. These recommendations are then saved as a new playlist. 
+
 # Running the project
 
 ```./gradlew run```
