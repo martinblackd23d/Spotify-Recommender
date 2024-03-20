@@ -42,7 +42,7 @@ Recommendation.java
 
 # Where to find requirements
 
-4 concrete classes (all demonstrated in MainApp.java):
+4 concrete classes (all demonstrated in MainSceneController.java in handleLogin()):
 - ArrayPlaylist - ArrayPlaylist.java
 - Auth - Auth.java
 - Song - Song.java
