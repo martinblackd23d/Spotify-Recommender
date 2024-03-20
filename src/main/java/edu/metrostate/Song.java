@@ -1,6 +1,9 @@
 package edu.metrostate;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import com.google.gson.JsonObject;
 
 abstract class AudioContent {
 	protected String id;
@@ -29,9 +32,21 @@ public class Song extends AudioContent{
 	private ArrayList<String> attributes;
 	private String artist;
 
-	public Song(String id) {
-		//TODO: get song info from Spotify API
+	public Song(String id, Auth auth) {
+		HashMap<String, String> headers = new HashMap<String, String>();
+		headers.put("Authorization", "Bearer " + auth.getAccessToken());
+		JsonObject response;
+		try {
+			response = Request.request("GET", "https://api.spotify.com/v1/tracks/" + id, null, headers, null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return;
+		}
 		this.id = id;
+		this.title = response.get("name").getAsString();
+		this.length = response.get("duration_ms").getAsInt() / 1000;
+		this.artist = response.get("artists").getAsJsonArray().get(0).getAsJsonObject().get("name").getAsString();
+		this.attributes = new ArrayList<String>();
 	}
 
 	public ArrayList<String> getAttributes() {

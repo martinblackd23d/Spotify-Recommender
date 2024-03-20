@@ -1,13 +1,16 @@
 package edu.metrostate;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.google.gson.JsonObject;
 
 interface Playlist {
 	public void addSong(Song song);
 	public void removeSong(String songId);
 	public ArrayList<Song> getList();
-	public void exportPlaylist();
-	public String getStats();
+	public void exportPlaylist(String name, Auth auth);
 }
 
 public class ArrayPlaylist implements Playlist {
@@ -42,13 +45,37 @@ public class ArrayPlaylist implements Playlist {
 	}
 
 	@Override
-	public void exportPlaylist() {
-		//TODO: implement
-	}
+	public void exportPlaylist(String name, Auth auth) {
+		String url = "https://api.spotify.com/v1/users/" + auth.getUserId() + "/playlists";
+        
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Authorization", "Bearer " + auth.getAccessToken());
+        headers.put("Content-Type", "application/json");
+        
+        String data = "{\"name\":\"" + name + "\",\"public\":false}";
+        
+		String playlistId;
+        try {
+            JsonObject response = Request.request("POST", url, null, headers, data);
+            playlistId = response.get("id").getAsString();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
 
-	@Override
-	public String getStats() {
-		//TODO: implement
-		return "";
+		url = "https://api.spotify.com/v1/playlists/" + playlistId + "/tracks";
+		data = "{\"uris\":[";
+		for (int i = 0; i < playlist.size(); i++) {
+			data += "\"spotify:track:" + playlist.get(i).getId() + "\"";
+			if (i < playlist.size() - 1) {
+				data += ",";
+			}
+		}
+		data += "]}";
+		try {
+			Request.request("POST", url, null, headers, data);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
