@@ -2,11 +2,14 @@
 
 ```./gradlew run```
 
+When the browser prompts, log into your Spotify account
+
 # Current functionality
-1. The program starts and displays the main UI
+1. The program starts
 2. It automatically prompts the user to log in
 3. Once the user is logged in, it generates a playlist from a hardcoded source song
 4. It saves the playlist into the user's library
+5. It also displays the main UI with the playlist
 
 # Code structure
 
