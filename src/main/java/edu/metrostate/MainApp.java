@@ -53,6 +53,11 @@ public class MainApp extends Application {
         Recommendation recommendation = new Recommendation();
         recommendation.addSong(new Song("2QTDuJIGKUjR7E2Q6KupIh", auth));
         Playlist playlist = recommendation.getRecommendation(auth);
+
+        //Update the list view with the new playlist
+        mainSceneController.updateRecListView(playlist);
+
+        //Export the playlist to the user's Spotify account
         playlist.exportPlaylist("test playlist", auth);
         System.out.println("Playlist created");
     }

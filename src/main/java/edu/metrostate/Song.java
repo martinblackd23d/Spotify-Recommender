@@ -33,7 +33,14 @@ public class Song extends AudioContent{
 	private String artist;
 	private String artistId;
 
+	/**
+	 * Constructor for Song
+	 * It takes a Spotify track ID, and automatically retrieves the song's details
+	 * @param id	Spotify track ID
+	 * @param auth 	Auth object
+	 */
 	public Song(String id, Auth auth) {
+		// get song details from Spotify
 		HashMap<String, String> headers = new HashMap<String, String>();
 		headers.put("Authorization", "Bearer " + auth.getAccessToken());
 		JsonObject response;
@@ -43,6 +50,8 @@ public class Song extends AudioContent{
 			e.printStackTrace();
 			return;
 		}
+
+		// populate song details
 		this.id = id;
 		this.title = response.get("name").getAsString();
 		this.length = response.get("duration_ms").getAsInt() / 1000;
@@ -57,7 +66,7 @@ public class Song extends AudioContent{
 
 	@Override
 	public String toString() {
-		return title + " by " + artist;
+		return title + " - " + artist;
 	}
 
 	public String getArtist() {

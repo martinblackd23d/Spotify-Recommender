@@ -45,9 +45,15 @@ public class ArrayPlaylist implements Playlist {
 	}
 
 	@Override
+	/**
+	 * Exports the playlist to the user's Spotify account
+	 * @param name Name of the playlist
+	 * @param auth Auth object
+	 */
 	public void exportPlaylist(String name, Auth auth) {
 		String url = "https://api.spotify.com/v1/users/" + auth.getUserId() + "/playlists";
         
+		// create playlist
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Authorization", "Bearer " + auth.getAccessToken());
         headers.put("Content-Type", "application/json");
@@ -63,6 +69,7 @@ public class ArrayPlaylist implements Playlist {
             return;
         }
 
+		// add songs to playlist
 		url = "https://api.spotify.com/v1/playlists/" + playlistId + "/tracks";
 		data = "{\"uris\":[";
 		for (int i = 0; i < playlist.size(); i++) {

@@ -2,6 +2,7 @@ package edu.metrostate;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 
 public class MainSceneController implements ValueChangedListener {
 
@@ -13,6 +14,9 @@ public class MainSceneController implements ValueChangedListener {
 
     @FXML
     private MainToolBar mainToolBar;
+
+    @FXML
+    private ListView<Song> recListView;
 
     private ValueStore store;
 
@@ -32,5 +36,10 @@ public class MainSceneController implements ValueChangedListener {
     @Override
     public void onValueChange(int newValue) {
         //value.setText(String.format(valueFormatString, newValue));
+    }
+
+    public void updateRecListView(Playlist playlist) {
+        recListView.getItems().clear();
+        recListView.getItems().addAll(playlist.getList());
     }
 }

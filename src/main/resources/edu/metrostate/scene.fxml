@@ -17,7 +17,7 @@
     <center>
         <AnchorPane>
          <children>
-            <ListView layoutX="21.0" layoutY="59.0" prefHeight="275.0" prefWidth="472.0" />
+            <ListView fx:id="recListView" layoutX="21.0" layoutY="59.0" prefHeight="275.0" prefWidth="472.0" />
             <TextField layoutX="21.0" layoutY="18.0" prefHeight="27.0" prefWidth="365.0" />
             <Button layoutX="407.0" layoutY="17.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="79.0" text="Search" />
          </children></AnchorPane>
@@ -54,7 +54,7 @@
          </VBox>
    </left>
    <top>
-      <Text fill="#dcffd9" strokeType="OUTSIDE" strokeWidth="0.0" text="Spotify Reccomdations" BorderPane.alignment="CENTER">
+      <Text fill="#dcffd9" strokeType="OUTSIDE" strokeWidth="0.0" text="Spotify Recommendations" BorderPane.alignment="CENTER">
          <font>
             <Font size="24.0" />
          </font></Text>
