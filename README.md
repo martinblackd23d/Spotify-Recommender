@@ -2,9 +2,11 @@
 
 ```./gradlew run```
 
-Currently the program will automatically initiate the login procedure by opening up the sign in page in the browser.
-
-Once successfully signed in, it will create a recommendation from one song and save it as a playlist for the logged in user.
+# Current functionality
+1. The program starts and displays the main UI
+2. It automatically prompts the user to log in
+3. Once the user is logged in, it generates a playlist from a hardcoded source song
+4. It saves the playlist into the user's library
 
 # Code structure
 
