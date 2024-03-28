@@ -62,18 +62,69 @@ Interface, implemented by ArrayPlaylist:
 Abstract class, inherited from by Song
 - AudioContent - Song.java
 
+
 # Functional requirements
-- Log the user into spotify
-- User inputs for significance of different criterias for recommending songs
-- take an input song from the user
-- take number of required return songs from the user
-- search for specified number of songs related to the input song 
-- return the specified number of songs in Spotify
-- Save the results as playlist
-- Return listening statistics based on averages
+## Log the user into spotify
+
+**How the project meets this requirement:**
+
+**How to test:**
+
+## User inputs for significance of different criterias for recommending songs
+
+**How the project meets this requirement:**
+
+**How to test:**
+
+## take an input song from the user
+
+**How the project meets this requirement:**
+
+**How to test:**
+
+## take number of required return songs from the user
+
+**How the project meets this requirement:**
+
+**How to test:**
+
+## search for specified number of songs related to the input song 
+
+**How the project meets this requirement:**
+
+**How to test:**
+
+## return the specified number of songs in Spotify
+
+**How the project meets this requirement:**
+
+**How to test:**
+
+## Save the results as playlist
+
+**How the project meets this requirement:**
+
+**How to test:**
+
+## Return listening statistics based on averages
+
+**How the project meets this requirement:**
+
+**How to test:**
 
 # Non-functional requirements
-- Backup
-- Flexibility
-- Portability
-- Privacy
+## Backup
+
+**How the project meets this requirement:**
+
+## Flexibility
+
+**How the project meets this requirement:**
+
+## Portability
+
+**How the project meets this requirement:**
+
+## Privacy
+
+**How the project meets this requirement:**
