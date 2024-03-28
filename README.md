@@ -124,7 +124,8 @@ Abstract class, inherited from by Song
 ## Portability
 
 **How the project meets this requirement:**
-
+This project is written in Java and works on different operating systems.
 ## Privacy
 
 **How the project meets this requirement:**
+The project is integrated with Spotify-- all user accounts are managed by Spotify and none of the user data is collected or stored permanently by this project.
