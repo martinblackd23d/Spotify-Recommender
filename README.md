@@ -1,3 +1,11 @@
+# Spotify Song Recommender
+
+Martin Black, Torri Presler, Tracey Treat
+
+ICS 372
+
+The Spotify Song Recommender is a Java program that, when given a seed (for example, another song), uses the [Spotify API](https://developer.spotify.com/documentation/web-api) to generate personalized song recommendations. These recommendations are then saved as a new playlist. 
+
 # Running the project
 
 ```./gradlew run```
@@ -25,7 +33,10 @@ Auth.java
 MainApp.java
 - main class
 - sets up UI
-- automatically runs some demo functionality
+
+MainSceneController.java
+- automatically runs some demo functionality when the login button is pressed
+- populates listview
 
 Request.java
 - Static class for handling HTTP requests
@@ -37,9 +48,9 @@ Song.java
 Recommendation.java
 - Class for handling recommendations
 
+# Where to find requirements
 
-
-4 concrete classes (all demonstrated in MainApp.java):
+4 concrete classes (all demonstrated in MainSceneController.java in handleLogin()):
 - ArrayPlaylist - ArrayPlaylist.java
 - Auth - Auth.java
 - Song - Song.java
@@ -50,3 +61,71 @@ Interface, implemented by ArrayPlaylist:
 
 Abstract class, inherited from by Song
 - AudioContent - Song.java
+
+
+# Functional requirements
+## Log the user into spotify
+
+**How the project meets this requirement:**
+
+**How to test:**
+
+## User inputs for significance of different criterias for recommending songs
+
+**How the project meets this requirement:**
+
+**How to test:**
+
+## take an input song from the user
+
+**How the project meets this requirement:**
+
+**How to test:**
+
+## take number of required return songs from the user
+
+**How the project meets this requirement:**
+
+**How to test:**
+
+## search for specified number of songs related to the input song 
+
+**How the project meets this requirement:**
+
+**How to test:**
+
+## return the specified number of songs in Spotify
+
+**How the project meets this requirement:**
+
+**How to test:**
+
+## Save the results as playlist
+
+**How the project meets this requirement:**
+
+**How to test:**
+
+## Return listening statistics based on averages
+
+**How the project meets this requirement:**
+
+**How to test:**
+
+# Non-functional requirements
+## Backup
+
+**How the project meets this requirement:**
+
+## Flexibility
+
+**How the project meets this requirement:**
+
+## Portability
+
+**How the project meets this requirement:**
+This project is written in Java and works on different operating systems.
+## Privacy
+
+**How the project meets this requirement:**
+The project is integrated with Spotify-- all user accounts are managed by Spotify and none of the user data is collected or stored permanently by this project.
