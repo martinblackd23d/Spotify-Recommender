@@ -54,6 +54,18 @@ public class MainSceneController implements ValueChangedListener {
     private BorderPane borderPane;
 
     @FXML
+    private void handleSettings() {
+        System.out.println("Settings button clicked");
+        if (loading) {
+            return;
+        }
+        startLoading();
+
+        settings();
+        stopLoading();
+    }
+
+    @FXML
     private void handleLogin() {
         System.out.println("Login button clicked");
         if (loading) {
@@ -177,23 +189,27 @@ public class MainSceneController implements ValueChangedListener {
         auth = new Auth();
         auth.login();
         if (auth.getAccessToken() == null) {
-            auth = null;
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Login failed");
-            alert.setContentText("Please try again");
-            alert.showAndWait();
+            Platform.runLater(() -> {
+                auth = null;
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Login failed");
+                alert.setContentText("Please try again");
+                alert.showAndWait();
+            });
         }
     }
 
     private void export() {
         System.out.println("Exporting playlist");
         if (playlist == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("No playlist to export");
-            alert.setContentText("Please create a playlist before exporting");
-            alert.showAndWait();
+            Platform.runLater(() -> {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("No playlist to export");
+                alert.setContentText("Please create a playlist before exporting");
+                alert.showAndWait();
+            });
         } else {
             Platform.runLater(() -> {
                 System.out.println("Taking input");
@@ -212,22 +228,28 @@ public class MainSceneController implements ValueChangedListener {
     }
 
     private void search() {
+        System.out.println("Searching for songs");
         if (auth == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Not logged in");
-            alert.setContentText("Please log in to Spotify before searching");
-            alert.showAndWait();
+            Platform.runLater(() -> {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Not logged in");
+                alert.setContentText("Please log in to Spotify before searching");
+                alert.showAndWait();
+            });
         } else if (searchBox.getText().equals("")) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("No search query");
-            alert.setContentText("Please enter a search query before searching");
-            alert.showAndWait();
+            Platform.runLater(() -> {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("No search query");
+                alert.setContentText("Please enter a search query before searching");
+                alert.showAndWait();
+            });
         } else {
             HashMap<String, String> params = new HashMap<String, String>();
             params.put("q", searchBox.getText());
             params.put("type", "track");
+            params.put("limit", settingsClass.getLimit().toString());
             HashMap<String, String> headers = new HashMap<String, String>();
             headers.put("Authorization", "Bearer " + auth.getAccessToken());
             try {
@@ -241,24 +263,32 @@ public class MainSceneController implements ValueChangedListener {
                 seed = playlist.getList().get(0);
                 updateRecListView(playlist);
             } catch (Exception e) {
-                e.printStackTrace();
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Search failed");
-                alert.setContentText("Please try again");
-                alert.showAndWait();
+                Platform.runLater(() -> {
+                    e.printStackTrace();
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Search failed");
+                    alert.setContentText("Please try again");
+                    alert.showAndWait();
+                });
             }
         }
     }
 
     private void select() {
         if (recListView.getSelectionModel().getSelectedItem() != null) {
-            Song selected = recListView.getSelectionModel().getSelectedItem();
+            seed = recListView.getSelectionModel().getSelectedItem();
             Recommendation rec = new Recommendation();
-            rec.addSong(selected);
+            rec.setLimit(settingsClass.getLimit());
+            rec.addSong(seed);
             playlist = rec.getRecommendation(auth);
+            playlist.addSong(seed, 0);
             updateRecListView(playlist);
         }
+    }
+
+    private void settings() {
+        settingsClass.showDialog();
     }
 
     private ValueStore store;
@@ -268,6 +298,8 @@ public class MainSceneController implements ValueChangedListener {
     private Playlist playlist;
 
     private boolean loading = false;
+
+    private Settings settingsClass = new Settings();
 
     private void startLoading() {
         loading = true;

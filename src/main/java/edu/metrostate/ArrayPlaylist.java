@@ -8,6 +8,7 @@ import com.google.gson.JsonObject;
 
 interface Playlist {
 	public void addSong(Song song);
+	public void addSong(Song song, int index);
 	public void removeSong(String songId);
 	public ArrayList<Song> getList();
 	public void exportPlaylist(String name, Auth auth);
@@ -23,6 +24,10 @@ public class ArrayPlaylist implements Playlist {
 	@Override
 	public void addSong(Song song) {
 		playlist.add(song);
+	}
+
+	public void addSong(Song song, int index) {
+		playlist.add(index, song);
 	}
 
 	@Override

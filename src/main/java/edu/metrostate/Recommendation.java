@@ -14,6 +14,7 @@ public class Recommendation {
     private List<String> seedArtists;
     private List<String> seedGenre;
     private HashMap<String, Integer> attributes;
+    private int limit = 20;
 
     /**
      * Constructor for Recommendation
@@ -46,6 +47,10 @@ public class Recommendation {
         seedGenre.add(genre);
     }
 
+    public void setLimit(int limit){
+        this.limit = limit;
+    }
+
     /**
      * Gets a list of songs based on the recommendation's current settings
      * @param auth Auth object
@@ -70,6 +75,7 @@ public class Recommendation {
         if (seedGenre.size() > 0){
             params.put("seed_genres", String.join(",", seedGenre));
         }
+        params.put("limit", Integer.toString(limit));
 
         // make request
         JsonObject response = null;
