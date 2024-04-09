@@ -5,6 +5,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.net.URI;
+import java.net.URLEncoder;
 import java.util.Map;
 import java.util.HashMap;
 import com.google.gson.Gson;
@@ -38,9 +39,9 @@ public class Request {
 			params = new HashMap<String, String>();
 		}
 		for (String key : params.keySet()) {
-			paramString += key + "=" + params.get(key) + "&";
+			paramString += key + "=" + URLEncoder.encode(params.get(key), StandardCharsets.UTF_8) + "&";
 		}
-		
+
 		//set up headers
 		if (headers == null) {
 			headers = new HashMap<String, String>();
