@@ -10,12 +10,12 @@ The Spotify Song Recommender is a Java program that, when given a seed (for exam
 
 ```./gradlew run```
 
-1. Press login button
-2. Log in to test spotify account in browser
+1. Press login button and log in to test spotify account in browser
 3. Click on settings and set desired playlist length
 4. Type song title in searchbox and click on search
 5. From the list of songs, click on the one you want to get recommendations for
 6. Click on Export to add playlist in Spotify account
+7. When prompted, change name of the playlist
 
 # Account to test project
 Email:
