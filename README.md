@@ -10,18 +10,93 @@ The Spotify Song Recommender is a Java program that, when given a seed (for exam
 
 ```./gradlew run```
 
-Press Login button
+1. Press login button
+2. Log in to test spotify account in browser
+3. Click on settings and set desired playlist length
+4. Type song title in searchbox and click on search
+5. From the list of songs, click on the one you want to get recommendations for
+6. Click on Export to add playlist in Spotify account
 
-When the browser prompts, log into your Spotify account
+# Account to test project
+Email:
+spotifyrecommendations@outlook.com
+Password:
+ICS-372 project
 
-# Current functionality
-1. The program starts and displays the main UI
-2. If the Login button is pressed it prompts the user to log in
-3. Once the user is logged in, it generates a playlist from a hardcoded source song
-4. It saves the playlist into the user's library
-5. It also displays the main UI with the playlist
+# Functional requirements
+## Log the user into Spotify
 
-# Code structure
+**How the project meets this requirement:**
+Using a Spotify account, users can log into the system. 
+
+**How to test:**
+On the main screen, click the 'Login' button. The Spotify login page will open up in a browser. Input test Spotify account's username and password. After successful login, you can close the browser page and return to the application. 
+
+## Search for a song from a query
+
+**How the project meets this requirement:**
+The program takes a user-inputted query and returns results using the Spotify API.
+
+**How to test:** On the main screen, type an input into the search bar (the input field to the left of the 'Search' button) and click 'Search'. The program then displays the results.
+
+## Specify the number of songs to be searched for or recommended
+
+**How the project meets this requirement:**
+Users can specify the song limit using the Settings feature. The program will display up to that many songs.
+
+**How to test:** On the main screen, click the 'Settings' button. Input the song limit in the text field. Then, click 'OK'. 
+
+## Create a list of recommendations from a selected song
+
+**How the project meets this requirement:**
+The program returns the specified number of recommendations based on the selected song.
+
+**How to test:**
+After a successful search, click on any song in the resulting list.
+
+## Export recommended list as playlist
+
+**How the project meets this requirement:** 
+Users can export the playlist created by the program with the 'Export' feature. Then, this playlist can be used in Spotify.
+
+**How to test:** After creating a playlist, click the 'Export' button.
+
+## Give name to exported playlist
+
+**How the project meets this requirement:** The exported playlist can be given a user specified name.
+
+**How to test:** After clicking the export button, type the desired name and click OK.
+
+
+## Extensibility
+The classes are written in a way that enables extending functionality beyond what is currently implemented.
+For example:
+- The Request class can be used to connect to other API endpoints
+- The Song and Recommendations classes can be easily extended to support attributes for more control over results
+- The Settings class can be extended for more control
+- The functions handling user input and the functions actually doing processing are somewhat decoupled for easier modification
+
+## Robustness
+
+**How the project meets this requirement:**
+Errors in usage are checked for and the appropriate error messages are presented.
+For example:
+- If login was not successful, or the search query is empty, searching will give a warning
+- If no playlist is available to export, it will give a warning
+- If invalid input is entered for limit, it will give a warning
+
+## Security
+**How the project meets this requirement:**
+This application implements the OAuth protocol to securely authenticate the user and use the API.
+
+## Usability
+**How the project meets this requirement:**
+While the application is waiting for a request, it is signaled to the user by changing the background color.
+Additionally, buttons are disabled, so repeated inputs don’t lead to errors.
+
+
+# Milestone 3 requirements
+## Code structure
 
 ArrayPlaylist.java
 - Interface for Playlist structures
@@ -48,7 +123,7 @@ Song.java
 Recommendation.java
 - Class for handling recommendations
 
-# Where to find requirements
+## Where to find requirements
 
 4 concrete classes (all demonstrated in MainSceneController.java in handleLogin()):
 - ArrayPlaylist - ArrayPlaylist.java
@@ -61,73 +136,3 @@ Interface, implemented by ArrayPlaylist:
 
 Abstract class, inherited from by Song
 - AudioContent - Song.java
-
-
-# Functional requirements
-## Log the user into spotify
-
-**How the project meets this requirement:**
-Using a Spotify account, users can log into the system. 
-
-**How to test:**
-On the main screen, click the 'Login' button. The Spotify login page will open up in a browser. Input your Spotify username and password. After successful login, you can close the browser page and return to the application. 
-
-## Search for a song from a query
-
-**How the project meets this requirement:**
-The program takes a user-inputted query and returns results using the Spotify API.
-
-**How to test:** On the main screen, type an input into the search bar (the input field to the left of the 'Search' button) and click 'Search'. The program then displays the results.
-
-## Specify the number of songs to be searched for or recommended
-
-**How the project meets this requirement:**
-Users can specify the song limit using the Settings feature. The program will display up to that many songs.
-
-**How to test:** On the main screen, click the 'Settings' button. Input the song limit in the text field. Then, click 'OK'. 
-
-## Create a list of recommendations from a selected song
-
-**How the project meets this requirement:**
-
-**How to test:**
-
-## Export recommended list as playlist
-
-**How the project meets this requirement:** 
-Users can export the playlist created by the program with the 'Export' feature. Then, this playlist can be used in Spotify.
-
-**How to test:** After creating a playlist, click the 'Export' button.
-
-## Give name to exported playlist
-
-**How the project meets this requirement:**
-
-**How to test:**
-
-
-## Extensibility
-The classes are written in a way that enables extending functionality beyond what is currently implemented.
-
-## Robustness
-
-**How the project meets this requirement:**
-Errors in usage are checked for and the appropriate error messages are presented.
-
-## Portability
-
-**How the project meets this requirement:**
-This application is written in Java and works on different operating systems.
-
-## Privacy
-
-**How the project meets this requirement:**
-This application is integrated with Spotify-- all user accounts are managed by Spotify and none of the user data is collected or stored permanently by this project.
-
-## Security
-**How the project meets this requirement:**
-This application implements the OAuth protocol to securely authenticate the user and use the API.
-
-## Usability
-**How the project meets this requirement:**
-While the application is working, it is signaled to the user by changing the background color or showing dialog boxes, and buttons are disabled, so repeated inputs don’t lead to errors.
