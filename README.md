@@ -110,8 +110,7 @@ MainApp.java
 - sets up UI
 
 MainSceneController.java
-- automatically runs some demo functionality when the login button is pressed
-- populates listview
+- contains application logic
 
 Request.java
 - Static class for handling HTTP requests
