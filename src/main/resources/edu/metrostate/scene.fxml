@@ -19,7 +19,7 @@
          <children>
             <ListView fx:id="recListView" onMouseClicked="#handleMouseClick" layoutX="21.0" layoutY="59.0" prefHeight="275.0" prefWidth="472.0" />
             <TextField fx:id="searchBox" layoutX="21.0" layoutY="18.0" prefHeight="27.0" prefWidth="365.0" />
-            <Button fx:id="searchButton" onAction="#handleSearch" layoutX="407.0" layoutY="17.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="79.0" text="Search" />
+            <Button fx:id="searchButton" onAction="#handleSearch" layoutX="407.0" layoutY="17.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="85.0" text="Search" />
          </children></AnchorPane>
     </center>
     <bottom>
@@ -31,7 +31,7 @@
          <VBox alignment="CENTER" BorderPane.alignment="TOP_LEFT">
          <Button fx:id="loginButton" onAction="#handleLogin" mnemonicParsing="false" prefHeight="27.0" prefWidth="82.0" text="Login">
             <VBox.margin>
-               <Insets bottom="30.0" left="10.0" top="-175.0" />
+               <Insets bottom="30.0" left="10.0" top="-157.0" />
             </VBox.margin>
             <font>
                <Font size="14.0" />

@@ -67,65 +67,67 @@ Abstract class, inherited from by Song
 ## Log the user into spotify
 
 **How the project meets this requirement:**
+Using a Spotify account, users can log into the system. 
 
 **How to test:**
+On the main screen, click the 'Login' button. The Spotify login page will open up in a browser. Input your Spotify username and password. After successful login, you can close the browser page and return to the application. 
 
-## User inputs for significance of different criterias for recommending songs
+## Search for a song from a query
 
 **How the project meets this requirement:**
+The program takes a user-inputted query and returns results using the Spotify API.
 
-**How to test:**
+**How to test:** On the main screen, type an input into the search bar (the input field to the left of the 'Search' button) and click 'Search'. The program then displays the results.
 
-## take an input song from the user
-
-**How the project meets this requirement:**
-
-**How to test:**
-
-## take number of required return songs from the user
+## Specify the number of songs to be searched for or recommended
 
 **How the project meets this requirement:**
+Users can specify the song limit using the Settings feature. The program will display up to that many songs.
 
-**How to test:**
+**How to test:** On the main screen, click the 'Settings' button. Input the song limit in the text field. Then, click 'OK'. 
 
-## search for specified number of songs related to the input song 
-
-**How the project meets this requirement:**
-
-**How to test:**
-
-## return the specified number of songs in Spotify
+## Create a list of recommendations from a selected song
 
 **How the project meets this requirement:**
 
 **How to test:**
 
-## Save the results as playlist
+## Export recommended list as playlist
+
+**How the project meets this requirement:** 
+Users can export the playlist created by the program with the 'Export' feature. Then, this playlist can be used in Spotify.
+
+**How to test:** After creating a playlist, click the 'Export' button.
+
+## Give name to exported playlist
 
 **How the project meets this requirement:**
 
 **How to test:**
 
-## Return listening statistics based on averages
+
+## Extensibility
+The classes are written in a way that enables extending functionality beyond what is currently implemented.
+
+## Robustness
 
 **How the project meets this requirement:**
-
-**How to test:**
-
-# Non-functional requirements
-## Backup
-
-**How the project meets this requirement:**
-
-## Flexibility
-
-**How the project meets this requirement:**
+Errors in usage are checked for and the appropriate error messages are presented.
 
 ## Portability
 
 **How the project meets this requirement:**
-This project is written in Java and works on different operating systems.
+This application is written in Java and works on different operating systems.
+
 ## Privacy
 
 **How the project meets this requirement:**
-The project is integrated with Spotify-- all user accounts are managed by Spotify and none of the user data is collected or stored permanently by this project.
+This application is integrated with Spotify-- all user accounts are managed by Spotify and none of the user data is collected or stored permanently by this project.
+
+## Security
+**How the project meets this requirement:**
+This application implements the OAuth protocol to securely authenticate the user and use the API.
+
+## Usability
+**How the project meets this requirement:**
+While the application is working, it is signaled to the user by changing the background color or showing dialog boxes, and buttons are disabled, so repeated inputs don’t lead to errors.
