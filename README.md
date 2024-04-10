@@ -24,6 +24,7 @@ Password:
 ICS-372 project
 
 # Functional requirements
+The functionality for all of these can be found in the MainSceneController.java file.
 ## Log the user into Spotify
 
 **How the project meets this requirement:**
