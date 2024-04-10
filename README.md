@@ -24,12 +24,6 @@ Password:
 ICS-372 project
 
 # Functional requirements
-The functionality for all of these can be found in the MainSceneController.java file.
-
-Except:
-- Login functionality is found in Auth.java
-- HTTP requests are handled in Request.java
-- Settings screen and storage is handled in Settings.java
 ## Log the user into Spotify
 
 **How the project meets this requirement:**
@@ -97,47 +91,42 @@ This application implements the OAuth protocol to securely authenticate the user
 
 ## Usability
 **How the project meets this requirement:**
-While the application is waiting for a request, it is signaled to the user by changing the background color.
+While the application is waiting for an HTTP request, it is signaled to the user by changing the background color.
 Additionally, buttons are disabled, so repeated inputs don’t lead to errors.
 
 
 # Milestone 3 requirements
 ## Code structure
 
-ArrayPlaylist.java
-- Interface for Playlist structures
-- Implementation class using ArrayList
+MainSceneController.java
+- contains application logic
+- Handlles user inputs
+- Contains driver logic for: Login, Recommendations, Export, Settings
+- Contains full logic for: search, naming exported playlist
+- Handles loading state while waiting for HTTP requests
 
 Auth.java
 - Class for handling logging in and authorization
 
-MainApp.java
-- main class
-- sets up UI
-
-MainSceneController.java
-- contains application logic
-
 Request.java
 - Static class for handling HTTP requests
+
+Recommendation.java
+- Class for handling recommendations
+
+Settings.java
+- handles the Settings window
+- Stores settings
+
+ArrayPlaylist.java
+- Handles exporting for playlists
+- Interface for Playlist structures
+- Implementation class using ArrayList
 
 Song.java
 - Abstract class for AudioContent structures
 - Concrete subclass Song
 
-Recommendation.java
-- Class for handling recommendations
-
-## Where to find requirements
-
-4 concrete classes (all demonstrated in MainSceneController.java in handleLogin()):
-- ArrayPlaylist - ArrayPlaylist.java
-- Auth - Auth.java
-- Song - Song.java
-- Recommendation - Recommendation.java
-
-Interface, implemented by ArrayPlaylist:
-- Playlist - ArrayPlaylist.java
-
-Abstract class, inherited from by Song
-- AudioContent - Song.java
+MainApp.java
+- main class
+- sets up UI
