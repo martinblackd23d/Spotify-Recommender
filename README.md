@@ -67,6 +67,7 @@ Users can export the playlist created by the program with the 'Export' feature. 
 
 **How to test:** After clicking the export button, type the desired name and click OK.
 
+# Non-functional requirements
 
 ## Extensibility
 The classes are written in a way that enables extending functionality beyond what is currently implemented.
@@ -94,9 +95,7 @@ This application implements the OAuth protocol to securely authenticate the user
 While the application is waiting for an HTTP request, it is signaled to the user by changing the background color.
 Additionally, buttons are disabled, so repeated inputs don’t lead to errors.
 
-
-# Milestone 3 requirements
-## Code structure
+# Code structure
 
 MainSceneController.java
 - contains application logic
