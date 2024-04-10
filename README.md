@@ -25,6 +25,11 @@ ICS-372 project
 
 # Functional requirements
 The functionality for all of these can be found in the MainSceneController.java file.
+
+Except:
+- Login functionality is found in Auth.java
+- HTTP requests are handled in Request.java
+- Settings screen and storage is handled in Settings.java
 ## Log the user into Spotify
 
 **How the project meets this requirement:**

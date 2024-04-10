@@ -8,21 +8,10 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 
-import com.sun.net.httpserver.HttpServer;
-import com.sun.net.httpserver.HttpHandler;
-import com.sun.net.httpserver.HttpExchange;
-
-import java.util.Map;
-import java.util.HashMap;
-
-import com.google.gson.JsonObject;
 
 public class MainApp extends Application {
 
-    private final ValueStore store;
-
     public MainApp() {
-        this.store = new ValueStore();
     }
 
     @Override
@@ -31,7 +20,6 @@ public class MainApp extends Application {
         BorderPane root = loader.load();
 
         MainSceneController mainSceneController = loader.getController();
-        mainSceneController.setValueStore(store);
 
         //MainToolBar mainToolBar = new MainToolBar();
         //MainToolBarController mainToolBarController = new MainToolBarController(mainToolBar, store);

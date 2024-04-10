@@ -8,21 +8,20 @@ import com.google.gson.JsonObject;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextInputDialog;
-import javafx.scene.paint.Color;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.CornerRadii;
 
-public class MainSceneController implements ValueChangedListener {
+public class MainSceneController {
 
+
+    /*
+     * FXML elements
+     */
     @FXML
     private Label label;
 
@@ -53,6 +52,12 @@ public class MainSceneController implements ValueChangedListener {
     @FXML
     private BorderPane borderPane;
 
+    /*
+     * FXML event handlers
+     * Each handler is responsible for calling the appropriate method to handle the user input
+     * Each method is called in a Task, so UI updates can be performed in the JavaFX thread
+     */
+    // Settings button clicked
     @FXML
     private void handleSettings() {
         System.out.println("Settings button clicked");
@@ -65,6 +70,7 @@ public class MainSceneController implements ValueChangedListener {
         stopLoading();
     }
 
+    // Login button clicked
     @FXML
     private void handleLogin() {
         System.out.println("Login button clicked");
@@ -95,6 +101,7 @@ public class MainSceneController implements ValueChangedListener {
         new Thread(task).start();
     };
 
+    // Export button clicked
     @FXML
     private void handleExport() {
         System.out.println("Export button clicked");
@@ -125,6 +132,7 @@ public class MainSceneController implements ValueChangedListener {
         new Thread(task).start();
     }
 
+    // Search button clicked
     @FXML
     private void handleSearch() {
         System.out.println("Search button clicked");
@@ -155,6 +163,7 @@ public class MainSceneController implements ValueChangedListener {
         new Thread(task).start();
     }
 
+    // RecListView playlist item clicked
     @FXML
     private void handleMouseClick() {
         System.out.println("Item selected");
@@ -185,9 +194,14 @@ public class MainSceneController implements ValueChangedListener {
         new Thread(task).start();
     }
 
+    /*
+     * Methods to handle user input
+     */
+    // Login to Spotify
     private void login() {
         auth = new Auth();
         auth.login();
+        // Show error message if login failed
         if (auth.getAccessToken() == null) {
             Platform.runLater(() -> {
                 auth = null;
@@ -200,8 +214,10 @@ public class MainSceneController implements ValueChangedListener {
         }
     }
 
+    // Export playlist to Spotify
     private void export() {
         System.out.println("Exporting playlist");
+        // Show error message if no playlist to export
         if (playlist == null) {
             Platform.runLater(() -> {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -211,6 +227,7 @@ public class MainSceneController implements ValueChangedListener {
                 alert.showAndWait();
             });
         } else {
+            // Show dialog to get playlist name
             Platform.runLater(() -> {
                 System.out.println("Taking input");
                 String name = "Recommendations - " + seed.getTitle();
@@ -221,14 +238,17 @@ public class MainSceneController implements ValueChangedListener {
                 if (result.isPresent()) {
                     name = result.get();
                 }
+                // Export playlist
                 playlist.exportPlaylist(name, auth);
                 System.out.println("Playlist created");
             });
         }
     }
 
+    // Search for songs on Spotify
     private void search() {
         System.out.println("Searching for songs");
+        // Show error message if not logged in
         if (auth == null) {
             Platform.runLater(() -> {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -238,6 +258,7 @@ public class MainSceneController implements ValueChangedListener {
                 alert.showAndWait();
             });
         } else if (searchBox.getText().equals("")) {
+            // Show error message if no search query
             Platform.runLater(() -> {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
@@ -246,6 +267,7 @@ public class MainSceneController implements ValueChangedListener {
                 alert.showAndWait();
             });
         } else {
+            // Create search query
             HashMap<String, String> params = new HashMap<String, String>();
             params.put("q", searchBox.getText());
             params.put("type", "track");
@@ -255,6 +277,7 @@ public class MainSceneController implements ValueChangedListener {
             try {
                 playlist = new ArrayPlaylist();
                 JsonObject response = Request.request("GET", "https://api.spotify.com/v1/search", params, headers, null);
+                // Add search results to playlist and display it
                 for (int i = 0; i < response.get("tracks").getAsJsonObject().get("items").getAsJsonArray().size(); i++) {
                     JsonObject track = response.get("tracks").getAsJsonObject().get("items").getAsJsonArray().get(i).getAsJsonObject();
                     Song song = new Song(track.get("id").getAsString(), auth);
@@ -263,6 +286,7 @@ public class MainSceneController implements ValueChangedListener {
                 seed = playlist.getList().get(0);
                 updateRecListView(playlist);
             } catch (Exception e) {
+                // Show error message if search failed
                 Platform.runLater(() -> {
                     e.printStackTrace();
                     Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -275,6 +299,7 @@ public class MainSceneController implements ValueChangedListener {
         }
     }
 
+    // Recommend songs based on selected song
     private void select() {
         if (recListView.getSelectionModel().getSelectedItem() != null) {
             seed = recListView.getSelectionModel().getSelectedItem();
@@ -287,20 +312,18 @@ public class MainSceneController implements ValueChangedListener {
         }
     }
 
+    // Open settings dialog
     private void settings() {
         settingsClass.showDialog();
     }
 
-    private ValueStore store;
-
     private Auth auth;
     private Song seed;
     private Playlist playlist;
-
     private boolean loading = false;
-
     private Settings settingsClass = new Settings();
 
+    // Disable buttons and change background color while loading
     private void startLoading() {
         loading = true;
         System.out.println("Loading...");
@@ -309,6 +332,7 @@ public class MainSceneController implements ValueChangedListener {
         });
     }
 
+    // Enable buttons and change background color when done loading
     private void stopLoading() {
         loading = false;
         System.out.println("Done loading");
@@ -318,20 +342,7 @@ public class MainSceneController implements ValueChangedListener {
     }
 
     public void initialize() {
-        //label.setText("Hello, ICS372 JavaFX");
         stopLoading();
-    }
-
-    public void setValueStore(ValueStore store) {
-        this.store = store;
-        if (this.store != null) {
-            this.store.registerValueChangeListener(this);
-        }
-    }
-
-    @Override
-    public void onValueChange(int newValue) {
-        //value.setText(String.format(valueFormatString, newValue));
     }
 
     public void updateRecListView(Playlist playlist) {
